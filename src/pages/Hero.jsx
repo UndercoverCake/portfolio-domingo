@@ -62,7 +62,7 @@ export default function Hero() {
               </p>
             </div>
             <div className={styles.buttonContainer}>
-              <a href="#" className={styles.ctaButton}>
+              <a href="/aboutme" className={styles.ctaButton}>
                 About me!
                 <span className={styles.buttonGlow}></span>
               </a>
