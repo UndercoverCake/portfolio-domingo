@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styles from "./hero.module.css"
 import BackgroundElements from './BackgroundElements'
+import {Link} from "react-router-dom"
 
 export default function Hero() {
   const [typedName, setTypedName] = useState("")
@@ -62,10 +63,10 @@ export default function Hero() {
               </p>
             </div>
             <div className={styles.buttonContainer}>
-              <a href="/aboutme" className={styles.ctaButton}>
+              <Link to="/aboutme" className={styles.ctaButton}>
                 About me!
                 <span className={styles.buttonGlow}></span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
