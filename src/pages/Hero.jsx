@@ -1,43 +1,71 @@
+import { useEffect, useState } from "react"
 import styles from "./hero.module.css"
+import BackgroundElements from './BackgroundElements'
 
 export default function Hero() {
+  const [typedName, setTypedName] = useState("")
+  const [typedDescription, setTypedDescription] = useState("")
+  const [showDescriptionCursor, setShowDescriptionCursor] = useState(true)
+  const fullName = "Kent Harold Domingo"
+  const fullDescription = "Welcome! This is a collection of my own proud accomplishments in IT as well as the step by step of the work during my journey as a student of IT."
+  
+  useEffect(() => {
+    let nameIndex = 0
+    let descIndex = 0
+    const nameSpeed = 150
+    const descSpeed = 20
+  
+    const nameTypingInterval = setInterval(() => {
+      if (nameIndex <= fullName.length) {
+        setTypedName(fullName.slice(0, nameIndex))
+        nameIndex++
+      } else {
+        clearInterval(nameTypingInterval)
+      }
+    }, nameSpeed) 
+  
+    const descTypingInterval = setInterval(() => {
+      if (descIndex <= fullDescription.length) {
+        setTypedDescription(fullDescription.slice(0, descIndex))
+        descIndex++
+      } else {
+        clearInterval(descTypingInterval)
+      }
+    }, descSpeed) 
+  
+    const blinkInterval = setInterval(() => {
+      setShowDescriptionCursor(prev => !prev)
+    }, 500)
+  
+    return () => {
+      clearInterval(nameTypingInterval)
+      clearInterval(descTypingInterval)
+      clearInterval(blinkInterval)
+    }
+  }, [])
+
   return (
     <div className={styles.hero}>
+      <BackgroundElements />
       <div className={styles.glowEffect}></div>
-
-      <div className={styles.decorativeElement}>
-        <svg viewBox="0 0 200 200" fill="currentColor">
-          <circle cx="0" cy="200" r="100" />
-        </svg>
-      </div>
 
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.mainContent}>
-            <h1 className={styles.name}>Kent Harold Domingo</h1>
-            <p className={styles.description}>
-            Welcome! This is a collection my own proud accomplishments in IT as well as the step by step of the work during my journey as a student of IT.
-            </p>
-            <a href="#" className={styles.ctaButton}>
-              Learn more about me!
-            </a>
-          </div>
-
-          <div className={styles.imageGrid}>
-            <div className={styles.imageWrapper}>
-              <img src="/K.jpg" alt="Project 1" className={styles.image} />
-
+            <div className={styles.textWrapper}>
+              <h1 className={styles.name}>
+                <span className={styles.nameText}>{typedName}</span>
+              </h1>
+              <p className={styles.description}>
+                {typedDescription}
+                {typedDescription.length === fullDescription.length && showDescriptionCursor && <span className={styles.cursor}>|</span>}
+              </p>
             </div>
-            <div className={styles.imageWrapper}>
-              <img src="/Proj1.png" alt="Project 2" className={styles.image} />
-            </div>
-            <div className={styles.imageWrapper}>
-              <img src="/proj3.png" alt="Project 3" className={styles.image} />
-
-            </div>
-            <div className={styles.imageWrapper}>
-              <img src="/Proj2.png" alt="Project 4" className={styles.image} />
-
+            <div className={styles.buttonContainer}>
+              <a href="#" className={styles.ctaButton}>
+                About me!
+                <span className={styles.buttonGlow}></span>
+              </a>
             </div>
           </div>
         </div>
@@ -45,5 +73,3 @@ export default function Hero() {
     </div>
   )
 }
-
-
