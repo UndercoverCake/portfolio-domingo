@@ -1,4 +1,4 @@
-import styles from "./About-me.module.css"
+import styles from "./About-Me.module.css"
 import { useEffect, useRef } from "react"   
 
 const projects = [
