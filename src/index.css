@@ -8,6 +8,12 @@
   --color-accent: #4299e1;
   --color-accent-hover: #3182ce;
   --font-family: "Poppins", sans-serif;
+
+  /* New tech-themed variables */
+  --grid-size: 30px;
+  --grid-color: rgba(66, 153, 225, 0.05);
+  --glow-intensity: 0.7;
+  --animation-speed: 1s;
 }
 
 body {
@@ -17,4 +23,86 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.5;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Tech grid background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  z-index: -1;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Global animations */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(66, 153, 225, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(66, 153, 225, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(66, 153, 225, 0.5);
+  }
+}
+
+/* Interactive elements */
+button,
+a,
+.card,
+.project-item {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
 }
