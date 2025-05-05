@@ -47,9 +47,9 @@ export default function Contact() {
 
     try {
       // Replace these with your actual EmailJS service ID, template ID, and public key
-      const serviceId = "service_xxxxxxx" // Replace with your EmailJS service ID
-      const templateId = "template_xxxxxxx" // Replace with your EmailJS template ID
-      const publicKey = "xxxxxxxxxxxxxxxxxxxx" // Replace with your EmailJS public key
+      const serviceId = "service_gd8pxt6" // Replace with your EmailJS service ID
+      const templateId = "template_c14fa0c" // Replace with your EmailJS template ID
+      const publicKey = "RFgenoMzzVZLWGTXa" // Replace with your EmailJS public key
 
       const templateParams = {
         from_name: formData.name,
