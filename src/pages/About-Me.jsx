@@ -1,5 +1,3 @@
-"use client"
-
 import styles from "./About-Me.module.css"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
