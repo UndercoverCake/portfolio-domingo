@@ -122,9 +122,11 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className={styles.infoTitle}>Email</h3>
+              <p>
               <a href="mailto:domingokentharold@gmail.com" className={styles.infoLink}>
                 domingokentharold@gmail.com
               </a>
+              </p>
             </div>
 
             <div className={styles.infoCard}>
