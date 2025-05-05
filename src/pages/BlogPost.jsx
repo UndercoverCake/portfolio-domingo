@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import styles from "./BlogPost.module.css"
