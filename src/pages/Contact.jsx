@@ -56,7 +56,8 @@ export default function Contact() {
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-      }
+        sent_date: new Date().toLocaleString() // Adds the current date and time
+      };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
 
