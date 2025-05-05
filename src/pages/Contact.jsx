@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import styles from "./Contact.module.css"
+import emailjs from "@emailjs/browser"
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMessage, setErrorMessage] = useState("")
   const formRef = useRef(null)
   const sectionRefs = useRef([])
 
@@ -39,13 +41,27 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus(null)
+    setErrorMessage("")
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // Replace these with your actual EmailJS service ID, template ID, and public key
+      const serviceId = "service_xxxxxxx" // Replace with your EmailJS service ID
+      const templateId = "template_xxxxxxx" // Replace with your EmailJS template ID
+      const publicKey = "xxxxxxxxxxxxxxxxxxxx" // Replace with your EmailJS public key
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      }
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
+
       setSubmitStatus("success")
       setFormData({
         name: "",
@@ -53,12 +69,13 @@ export default function Contact() {
         subject: "",
         message: "",
       })
-
-      // Reset status after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null)
-      }, 5000)
-    }, 1500)
+    } catch (error) {
+      console.error("Error sending email:", error)
+      setSubmitStatus("error")
+      setErrorMessage("Failed to send your message. Please try again later.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -107,11 +124,9 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className={styles.infoTitle}>Email</h3>
-              <p>
               <a href="mailto:domingokentharold@gmail.com" className={styles.infoLink}>
                 domingokentharold@gmail.com
               </a>
-              </p>
             </div>
 
             <div className={styles.infoCard}>
@@ -249,6 +264,8 @@ export default function Contact() {
               {submitStatus === "success" && (
                 <div className={styles.successMessage}>Your message has been sent successfully!</div>
               )}
+
+              {submitStatus === "error" && <div className={styles.errorMessage}>{errorMessage}</div>}
             </form>
           </div>
         </div>
