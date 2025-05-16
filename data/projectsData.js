@@ -23,7 +23,7 @@ export const projects = [
       id: "project-3",
       title: "Pokemon Simulator",
       description:
-        "A software engineering project aimed at aiding laundry service shops with inventory tracking, customer management, and service scheduling.",
+        "A fun project that was about accessing the pokemon api",
       image: "/pokemon-sim.png?height=300&width=500&text=Laundry+System",
       technologies: ["React", "Vite", "CSS Modules", "React Router", "json-server"],
       repoUrl: "https://github.com/UndercoverCake/pokemon-project",
